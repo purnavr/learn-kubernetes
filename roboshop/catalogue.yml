@@ -18,13 +18,13 @@ metadata:
 spec:
   containers:
     - name: catalogue
-      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/catalogue:2.0.0
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/catalogue:2.0.1
       volumeMounts:
         - mountPath: /params
           name: params
   initContainers:
     - name: aws-ssm-param-store
-      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.0
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.3
       args: ["DOCUMENTDB:prod.catalogue.mongo"]
       volumeMounts:
         - mountPath: /params
