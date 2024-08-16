@@ -1,13 +1,39 @@
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cart
+  annotations:
+
+
+
+---
+
+apiVersion: v1
 kind: Pod
 metadata:
   name: cart
   labels:
     component: cart
 spec:
+  serviceAccountName: cart
   containers:
     - name: cart
       image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/cart:2.0.0
+      volumeMounts:
+        - mountPath: /params
+          name: params
+  initContainers:
+    - name: aws-ssm-param-store
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.0
+      args: ["sample:dev.docdb.pass"]
+      volumeMounts:
+        - mountPath: /params
+          name: params
+  volumes:
+    - name: params
+      emptyDir:
+        sizeLimit: 100Mi
+
 
 ---
 
@@ -22,3 +48,7 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
+
+
+
+
