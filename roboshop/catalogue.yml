@@ -3,6 +3,7 @@ kind: ServiceAccount
 metadata:
   name: catalogue
   annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::667211563329:role/ssm-fro-eksk
 
 
 
@@ -24,7 +25,7 @@ spec:
   initContainers:
     - name: aws-ssm-param-store
       image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.0
-      args: ["sample:dev.docdb.pass"]
+      args: ["DOCUMENTDB:prod.catalogue.mongo"]
       volumeMounts:
         - mountPath: /params
           name: params
