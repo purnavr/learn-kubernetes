@@ -5,7 +5,10 @@ metadata:
   annotations:
     eks.amazonaws.com/role-arn: arn:aws:iam::667211563329:role/ssm-eks
 
+
+
 ---
+
 apiVersion: v1
 kind: Pod
 metadata:
@@ -16,13 +19,13 @@ spec:
   serviceAccountName: cart
   containers:
     - name: cart
-      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/cart:2.0.3
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/cart:2.0.1
       volumeMounts:
         - mountPath: /params
           name: params
   initContainers:
     - name: aws-ssm-param-store
-      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/cart:2.0.3
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.3
       args: ["sample:dev.docdb.pass"]
       volumeMounts:
         - mountPath: /params
@@ -31,7 +34,10 @@ spec:
     - name: params
       emptyDir:
         sizeLimit: 100Mi
+
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -43,7 +49,6 @@ spec:
     - protocol: TCP
       port: 8080
       targetPort: 8080
----
 
 
 
