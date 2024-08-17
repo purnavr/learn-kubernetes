@@ -16,13 +16,13 @@ spec:
   serviceAccountName: cart
   containers:
     - name: cart
-      image: 739561048503.dkr.ecr.us-east-1.amazonaws.com/cart:2.0.3
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/catalogue:2.0.3
       volumeMounts:
         - mountPath: /params
           name: params
   initContainers:
     - name: aws-ssm-param-store
-      image: 739561048503.dkr.ecr.us-east-1.amazonaws.com/aws-ssm-param-store:2.0.3
+      image: 667211563329.dkr.ecr.us-east-1.amazonaws.com/catalogue:2.0.3
       args: ["sample:dev.docdb.pass"]
       volumeMounts:
         - mountPath: /params
