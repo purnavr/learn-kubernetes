@@ -3,7 +3,7 @@ kind: ServiceAccount
 metadata:
   name: cart
   annotations:
-    eks.amazonaws.com/role-arn: arn:aws:iam::667211563329:role/ssm-fro-eksk
+    eks.amazonaws.com/role-arn: arn:aws:iam::667211563329:role/ssm-eks
 
 
 
